@@ -23,9 +23,7 @@ import { GraphConnections } from "./support/connections";
 interface Props {
   stages: Array<StageInfo>;
   layout?: Partial<LayoutInfo>;
-  setStages?: (stages: Array<StageInfo>) => void;
   onNodeClick?: (nodeName: string, id: number) => void;
-  selectedStage?: StageInfo;
   path?: string;
   collapsed?: boolean;
 }
@@ -57,7 +55,6 @@ export class PipelineGraph extends React.Component {
       measuredWidth: 0,
       measuredHeight: 0,
       layout: { ...defaultLayout, ...props.layout },
-      selectedStage: props.selectedStage,
     };
   }
 
@@ -92,11 +89,6 @@ export class PipelineGraph extends React.Component {
       needsLayout = true;
     }
 
-    if (nextProps.selectedStage !== this.props.selectedStage) {
-      // If we're just changing selectedStage, we don't need to re-generate the children
-      newState = { ...newState, selectedStage: nextProps.selectedStage };
-    }
-
     if (nextProps.stages !== this.props.stages) {
       needsLayout = true;
     }
@@ -119,9 +111,6 @@ export class PipelineGraph extends React.Component {
    * Main process for laying out the graph. Calls out to PipelineGraphLayout module.
    */
   private stagesUpdated(newStages: Array<StageInfo> = []) {
-    if (this.props.setStages != undefined) {
-      this.props.setStages(newStages);
-    }
     this.setState(
       layoutGraph(newStages, this.state.layout, this.props.collapsed ?? false)
     );
