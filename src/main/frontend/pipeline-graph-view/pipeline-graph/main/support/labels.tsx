@@ -3,7 +3,8 @@ import * as React from "react";
 import { nodeStrokeWidth } from "../support/StatusIcons";
 import { TruncatingLabel } from "../support/TruncatingLabel";
 import { NodeLabelInfo, LayoutInfo, StageInfo } from "../PipelineGraphModel";
-import { sequentialStagesLabelOffset } from "../PipelineGraphLayout";
+
+export const sequentialStagesLabelOffset = 70;
 
 interface RenderBigLabelProps {
   details: NodeLabelInfo;

@@ -18,7 +18,7 @@ import {
   SmallLabel,
   SequentialContainerLabel,
 } from "./support/labels";
-import { GraphConnections } from "./support/connections";
+import { GraphConnections } from "./connection/GraphConnections";
 
 interface Props {
   stages: Array<StageInfo>;
